@@ -40,8 +40,6 @@ mouseX = event.clientX;
 mouseY = event.clientY;
 
 
-
-
 // Rotate the cube based on mouse drag
 const deltaX = mouseX - lastMouseX;
 const deltaY = mouseY - lastMouseY
@@ -54,11 +52,20 @@ if (mouseDown) {
   lastMouseX = mouseX;
   lastMouseY = mouseY;
 }
+
+function onDocumentMouseScroll(event) {
+    event.preventDefault();
+    const zoomSpeed = 0.01;
+    camera.position.z += event.deltaY * zoomSpeed;
+  }
+
+
 function animate() {
     requestAnimationFrame( animate );   
 
-   
-    cube.rotation.y += 0.007;
+
+    if (!mouseDown) {
+    cube.rotation.y += 0.010; }
 
 
     renderer.render( scene, camera );
@@ -67,6 +74,8 @@ function animate() {
 document.addEventListener("mousedown", onDocumentMouseDown, false);
 document.addEventListener("mouseup", onDocumentMouseUp, false);
 document.addEventListener("mousemove", onDocumentMouseMove, false);
+document.addEventListener("wheel", onDocumentMouseScroll, false);
+
 
 
 animate();
