@@ -57,7 +57,7 @@ if (mouseDown) {
 function animate() {
     requestAnimationFrame( animate );   
 
-    cube.rotation.x += 0.007;
+   
     cube.rotation.y += 0.007;
 
 
